@@ -6,17 +6,23 @@ import { IOmdbResponse } from "../models/IOmdbResponse";
 import { ShowResult } from "../components/ShowResult";
 
 export const MovieSearch = () => {
-  const [movies, setMovies] = useState<IMovie[]>([]);
-  const [searchWord, setSearchWord] = useState("");
+  const [movies, setMovies] = useState<IMovie[]>(
+    JSON.parse(localStorage.getItem("movies") || "[]")
+  );
+  const [searchWord, setSearchWord] = useState(
+    localStorage.getItem("search word") || ""
+  );
 
   const searchMovies = async (searchWord: string) => {
     setSearchWord(searchWord)
+    localStorage.setItem("search word", searchWord);
     const response = await axios.get<IOmdbResponse>(
       `http://www.omdbapi.com/?apikey=${
         import.meta.env.VITE_OMDB_API_KEY
       }&s=${searchWord}`
     );
-    setMovies(response.data.Search);
+    setMovies(response.data.Search)
+    localStorage.setItem("movies", JSON.stringify(movies));
   };
 
   return (
