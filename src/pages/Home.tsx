@@ -1,4 +1,6 @@
 export const Home = () => {
-    return <>Home</>;
+    return <div className="min-h-screen">
+      Home
+    </div>;
   };
   
