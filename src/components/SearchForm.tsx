@@ -1,6 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
-export const SearchForm = () => {
+export interface ISearchFormProps {
+  search: (text: string) => void;
+}
+
+export const SearchForm = ({ search }: ISearchFormProps) => {
   const [searchWord, setSearchWord] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -9,7 +13,8 @@ export const SearchForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
+    search(searchWord);
+    setSearchWord("");
   };
 
   return (
