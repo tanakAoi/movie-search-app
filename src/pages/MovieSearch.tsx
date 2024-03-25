@@ -3,9 +3,10 @@ import { SearchForm } from "../components/SearchForm";
 import { IMovie } from "../models/IMovie";
 import axios from "axios";
 import { IOmdbResponse } from "../models/IOmdbResponse";
+import { ShowResult } from "../components/ShowResult";
 
 export const MovieSearch = () => {
-  const [movies, setMovies] = useState<IMovie[]>();
+  const [movies, setMovies] = useState<IMovie[]>([]);
 
   const searchMovies = async (searchWord: string) => {
     const response = await axios.get<IOmdbResponse>(
@@ -19,7 +20,7 @@ export const MovieSearch = () => {
   return (
     <div className="min-h-screen">
       <SearchForm search={searchMovies} />
-      <section>result</section>
+      <ShowResult movies={movies} />
     </div>
   );
 };
