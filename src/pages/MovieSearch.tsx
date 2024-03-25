@@ -7,8 +7,10 @@ import { ShowResult } from "../components/ShowResult";
 
 export const MovieSearch = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
+  const [searchWord, setSearchWord] = useState("");
 
   const searchMovies = async (searchWord: string) => {
+    setSearchWord(searchWord)
     const response = await axios.get<IOmdbResponse>(
       `http://www.omdbapi.com/?apikey=${
         import.meta.env.VITE_OMDB_API_KEY
@@ -20,7 +22,7 @@ export const MovieSearch = () => {
   return (
     <div className="min-h-screen">
       <SearchForm search={searchMovies} />
-      <ShowResult movies={movies} />
+      <ShowResult movies={movies} searchWord={searchWord} />
     </div>
   );
 };
