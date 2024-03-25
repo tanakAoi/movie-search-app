@@ -22,7 +22,7 @@ export const MovieSearch = () => {
       }&s=${searchWord}`
     );
     setMovies(response.data.Search)
-    localStorage.setItem("movies", JSON.stringify(movies));
+    localStorage.setItem("movies", JSON.stringify(response.data.Search));
   };
 
   return (
