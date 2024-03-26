@@ -6,7 +6,7 @@ export const Header = () => {
       <div className="navbar bg-zinc-300">
         <div className="flex-1">
           <NavLink className="btn btn-ghost text-xl" to={"/"}>
-            Movie Search
+            Movie Search App
           </NavLink>
         </div>
         <div className="flex-none">
