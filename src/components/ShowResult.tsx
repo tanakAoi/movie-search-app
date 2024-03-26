@@ -47,15 +47,23 @@ export const ShowResult = ({ movies, searchWord }: IShowResultProps) => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">{movie?.Title}</h3>
-          <p className="py-4">{movie?.Year}</p>
-          <p className="py-4">{movie?.Rated}</p>
-          <p className="py-4">{movie?.imdbRating}</p>
-          <p className="py-4">{movie?.Genre}</p>
-          <p className="py-4">{movie?.Runtime}</p>
-          <p className="py-4">{movie?.Director}</p>
-          <p className="py-4">{movie?.Actors}</p>
-          <p className="py-4">{movie?.Plot}</p>
+          <div className="px-8 py-5 flex flex-col items-center gap-3">
+            <h3 className="font-bold text-xl">{movie?.Title}</h3>
+            <div className="flex gap-10">
+              <p className="py-4">{movie?.Year}</p>
+              <p className="py-4">IMDB: {movie?.imdbRating}</p>
+            </div>
+            <div className="flex items-center gap-5">
+              <p className="py-4">{movie?.Rated}</p>
+              <span>|</span>
+              <p className="py-4">{movie?.Runtime}</p>
+              <span>|</span>
+              <p className="py-4">{movie?.Genre}</p>
+            </div>
+            <p className="py-4">Director: {movie?.Director}</p>
+            <p className="py-4">Cast: {movie?.Actors}</p>
+            <p className="py-4">{movie?.Plot}</p>
+          </div>
         </div>
       </dialog>
     </section>
