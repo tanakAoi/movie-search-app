@@ -18,7 +18,7 @@ export const SearchForm = ({ search }: ISearchFormProps) => {
   };
 
   return (
-    <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+    <form className="flex flex-col items-center gap-5 pt-24" onSubmit={handleSubmit}>
       <input
         type="text"
         value={searchWord}
