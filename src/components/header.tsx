@@ -12,10 +12,10 @@ export const Header = () => {
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1 flex gap-2">
             <li>
-              <NavLink to={"/"}>Home</NavLink>
+              <NavLink to={"/"} className="text-base">Home</NavLink>
             </li>
             <li>
-              <NavLink to={"/movie"}>Movie</NavLink>
+              <NavLink to={"/movie"} className="text-base">Movie</NavLink>
             </li>
           </ul>
         </div>
