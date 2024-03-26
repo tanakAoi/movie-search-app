@@ -12,23 +12,26 @@ export const MovieSearch = () => {
   const [searchWord, setSearchWord] = useState(
     localStorage.getItem("search word") || ""
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchMovies = async (searchWord: string) => {
-    setSearchWord(searchWord)
+    setIsLoading(true);
+    setSearchWord(searchWord);
     localStorage.setItem("search word", searchWord);
     const response = await axios.get<IOmdbResponse>(
       `http://www.omdbapi.com/?apikey=${
         import.meta.env.VITE_OMDB_API_KEY
       }&s=${searchWord}`
     );
-    setMovies(response.data.Search)
+    setMovies(response.data.Search);
     localStorage.setItem("movies", JSON.stringify(response.data.Search));
+    setIsLoading(false);
   };
 
   return (
     <div className="min-h-screen">
       <SearchForm search={searchMovies} />
-      <ShowResult movies={movies} searchWord={searchWord} />
+      <ShowResult movies={movies} searchWord={searchWord} isLoading={isLoading} />
     </div>
   );
 };
