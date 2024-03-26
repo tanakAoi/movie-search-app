@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IMovie } from "../models/IMovie";
 import { IMovieExt } from "../models/IMovieExt";
 import { getMovieDetailById } from "../services/movieService";
@@ -15,6 +15,12 @@ export const ShowResult = ({
   isLoading,
 }: IShowResultProps) => {
   const [movie, setMovie] = useState<IMovieExt>();
+
+  useEffect(() => {
+    return () => {
+        localStorage.clear()
+    }
+  }, [])
 
   const getMovieDetail = async (imdbId: string) => {
     const movieDetailData = await getMovieDetailById(imdbId);
