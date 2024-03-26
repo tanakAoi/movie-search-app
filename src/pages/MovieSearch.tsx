@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { SearchForm } from "../components/SearchForm";
 import { IMovie } from "../models/IMovie";
-import axios from "axios";
-import { IOmdbResponse } from "../models/IOmdbResponse";
 import { ShowResult } from "../components/ShowResult";
+import { getMoviesByWord } from "../services/movieService";
 
 export const MovieSearch = () => {
   const [movies, setMovies] = useState<IMovie[]>(
@@ -16,15 +15,13 @@ export const MovieSearch = () => {
 
   const searchMovies = async (searchWord: string) => {
     setIsLoading(true);
+
     setSearchWord(searchWord);
     localStorage.setItem("search word", searchWord);
-    const response = await axios.get<IOmdbResponse>(
-      `http://www.omdbapi.com/?apikey=${
-        import.meta.env.VITE_OMDB_API_KEY
-      }&s=${searchWord}`
-    );
-    setMovies(response.data.Search);
-    localStorage.setItem("movies", JSON.stringify(response.data.Search));
+
+    const moviesData = await getMoviesByWord(searchWord)
+    setMovies(moviesData);
+    localStorage.setItem("movies", JSON.stringify(moviesData));
     setIsLoading(false);
   };
 

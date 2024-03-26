@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IMovie } from "../models/IMovie";
 import { IMovieExt } from "../models/IMovieExt";
-import axios from "axios";
+import { getMovieDetailById } from "../services/movieService";
 
 interface IShowResultProps {
   movies: IMovie[];
@@ -17,12 +17,8 @@ export const ShowResult = ({
   const [movie, setMovie] = useState<IMovieExt>();
 
   const getMovieDetail = async (imdbId: string) => {
-    const response = await axios.get<IMovieExt>(
-      `http://www.omdbapi.com/?apikey=${
-        import.meta.env.VITE_OMDB_API_KEY
-      }&i=${imdbId}`
-    );
-    setMovie(response.data);
+    const movieDetailData = await getMovieDetailById(imdbId);
+    setMovie(movieDetailData);
 
     const modal = document.getElementById("modal") as HTMLDialogElement;
     if (modal) {
